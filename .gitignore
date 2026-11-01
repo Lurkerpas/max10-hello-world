@@ -59,3 +59,16 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# Quartus outputs that may land in the project root (contain local paths/hostname)
+qdb/
+tmp-clearbox/
+*.qws
+*.rpt
+*.summary
+*.smsg
+*.pin
+*.jdi
+*.sof
+*.pof
+*.rbf
