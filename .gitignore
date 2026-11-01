@@ -1,3 +1,9 @@
+# FPGA
+build/*
+output_files/*
+db/*
+incremental_db/*
+
 # Prerequisites
 *.d
 

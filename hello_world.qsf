@@ -1,0 +1,52 @@
+# maXimator (Kamami) board + multi-function shield, MAX 10 10M08DAF256C8G
+set_global_assignment -name FAMILY "MAX 10"
+set_global_assignment -name DEVICE 10M08DAF256C8GES
+set_global_assignment -name TOP_LEVEL_ENTITY hello_world
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+
+set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
+set_global_assignment -name VHDL_SHOW_LMF_MAPPING_MESSAGES OFF
+set_global_assignment -name VHDL_FILE rtl/blink.vhd
+set_global_assignment -name VHDL_FILE rtl/scroller.vhd
+set_global_assignment -name VHDL_FILE rtl/hello_world.vhd
+set_global_assignment -name SDC_FILE hello_world.sdc
+
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 4
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_WEAK_PULLUP "AS INPUT TRI-STATED WITH WEAK PULL-UP"
+
+# Same I/O standard as the vendor's example projects
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+
+# 10 MHz oscillator
+set_location_assignment PIN_L3 -to clk
+
+# User LEDs, active high
+set_location_assignment PIN_M16 -to led[0]
+set_location_assignment PIN_N16 -to led[1]
+set_location_assignment PIN_P16 -to led[2]
+set_location_assignment PIN_R16 -to led[3]
+
+# Multi-function shield (Arduino header D0..D11), 4-digit multiplexed 7-segment display.
+# seg[0..6] = segments a..g, seg[7] = decimal point; all active high.
+set_location_assignment PIN_L16 -to seg[0]
+set_location_assignment PIN_J15 -to seg[1]
+set_location_assignment PIN_J16 -to seg[2]
+set_location_assignment PIN_H15 -to seg[3]
+set_location_assignment PIN_H16 -to seg[4]
+set_location_assignment PIN_G15 -to seg[5]
+set_location_assignment PIN_G16 -to seg[6]
+set_location_assignment PIN_F16 -to seg[7]
+
+# digit[0] is the rightmost digit, active high
+set_location_assignment PIN_E15 -to digit[0]
+set_location_assignment PIN_E16 -to digit[1]
+set_location_assignment PIN_D15 -to digit[2]
+set_location_assignment PIN_D16 -to digit[3]
+
+# Explicit drive settings for all outputs
+set_instance_assignment -name CURRENT_STRENGTH_NEW "8MA" -to led[*]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "8MA" -to seg[*]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "8MA" -to digit[*]
